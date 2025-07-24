@@ -1,10 +1,8 @@
 "use client";
 
-import { useTheme } from "next-themes";
 import { ChangeEvent, useRef, useState } from "react";
 import { toast } from "sonner";
-import Picker from "@emoji-mart/react"
-import data from "@emoji-mart/react"
+import EmojiPicker from 'emoji-picker-react'
 import { Laugh, Mic, Paperclip, SendHorizonal, Trash, X } from "lucide-react";
 import { Button } from "../ui/button";
 import { BounceLoader } from "react-spinners";
@@ -21,7 +19,7 @@ export const Footer = ({ onSendMessage }: Props) => {
     const [messageValue, setMessageValue] = useState("")
     const [messageAttachment, setMessageAttachment] = useState<File | null>(null)
 
-    const theme = useTheme()
+
 
     const mediaRecorder = useRef<MediaRecorder | null>(null)
 
@@ -110,11 +108,10 @@ export const Footer = ({ onSendMessage }: Props) => {
     return (
         <div>
             <div className={`fixed ml-2 ${emojiPicker ? "opacity-100 bottom-16" : "-bottom-[440px] opacity-0"} duration-300`}>
-                <Picker
-                    data={data}
-                    theme={theme.theme}
-                    onEmojiSelect={handleEmojiSelect}
-                />
+               <EmojiPicker
+ 
+  onEmojiClick={(emojiData) => handleEmojiSelect({ native: emojiData.emoji })}
+/>
             </div>
 
             {messageAttachment &&
